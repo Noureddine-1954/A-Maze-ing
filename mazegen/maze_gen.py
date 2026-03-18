@@ -3,6 +3,7 @@ from mazegen import Cell
 
 
 class MazeGenerator:
+    """this is a maze class"""
     def __init__(self,
                  height: int,
                  width: int,
