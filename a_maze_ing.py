@@ -26,8 +26,14 @@ if __name__ == "__main__":
     }
 
     print(config.values())
-    wd, ht, ent, ext, ot_file, perfect, seed = config.values()
-    maze_instance = MazeGenerator(wd, ht, ent, ext, perfect, seed)
+    ht = config["HEIGHT"]
+    wd = config["WIDTH"]
+    ent = config["ENTRY"]
+    ext = config["EXIT"]
+    ot_file = config["OUTPUT_FILE"]
+    perfect = config["PERFECT"]
+    seed = config["SEED"]
+    maze_instance = MazeGenerator(ht, wd, ent, ext, seed, perfect)
     # this is for the config file width, height...
     while True:
 

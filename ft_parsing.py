@@ -3,6 +3,7 @@ from typing import Dict, Any
 
 
 class ConfigError(Exception):
+    """Custom Error"""
     pass
 
 
@@ -138,7 +139,7 @@ def ft_parsing() -> Dict[str, Any]:
     if width <= 0 or height <= 0:
         raise ConfigError("WIDTH and HEIGHT must be > 0")
 
-    if not (0 <= entry_x < width and 0 <= entry_y < height):
+    if not (0 <= entry_y < width and 0 <= entry_x < height):
         raise ConfigError("ENTRY outside maze bounds")
 
     if not (0 <= exit_x < width and 0 <= exit_y < height):
