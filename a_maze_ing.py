@@ -8,7 +8,7 @@ from display import (print_maze,
 from ft_outputing import ft_outputing
 from typing import Generator, Tuple
 
-# program setps
+# program steps:
 # parsing ...
 # generate maze
 # print it and the menu
@@ -16,6 +16,17 @@ from typing import Generator, Tuple
 
 
 def generate_color() -> Generator[Tuple[str, str], None, None]:
+    """Yield maze color names and their ANSI escape codes in a infinite cycle.
+
+    Iterates over a fixed palette of named 256-color ANSI codes and wraps
+    around indefinitely, so callers can advance the color on each user
+    request without tracking position themselves.
+
+    Yields:
+        A ``(name, code)`` tuple where ``name`` is a lowercase color label
+        (e.g. ``"green"``) and ``code`` is the corresponding ANSI escape
+        string (e.g. ``"\\033[38;5;34m"``).
+    """
     all_colors = {
         "green": "\033[38;5;34m",
         "red": "\033[38;5;196m",
@@ -37,7 +48,7 @@ if __name__ == "__main__":
         print("Config Error:", e)
         exit(1)
 
-    # this helps as the bridge between the input and the program paramters
+    # this helps as the bridge between the input and the program parameters
     settings = {
         "generate": True,
         "show_path": False,
@@ -61,12 +72,9 @@ if __name__ == "__main__":
 
     gen_colors = generate_color()
     prev = ("white", "\033[0m")
-    # if seed is None:
-    #     del settings["use_seed"]
-    # this is for the config file width, height...
+
     while True:
 
-        # this helps make a dynamic menu
         if settings['show_path']:
             showing = "On"
         else:
@@ -97,51 +105,39 @@ if __name__ == "__main__":
 
         try:
             clear()
-            # wether to generate, change colors, show path or not
             generate, show_path, use_seed, anim = settings.values()
-            # this is for settings
 
-            # this is always true at the start of the program
-            # automatically generate, solve and output in the ot_file
             if generate:
-                # init the seed obj if allowed in the settings
                 maze_instance.seed = seed if use_seed else None
-                # gen the maze
                 maze = maze_instance.generate_maze()
-                # solve the maze
                 solution = maze_solver(maze, ent, ext)
-                # output the maze in the file
                 ft_outputing(ot_file, maze, ent, ext, solution)
-                # after generating the maze
-                # we only generate it again after the user chooses 1
                 settings["generate"] = False
 
-            # this is where the maze gets printed
             print_maze(maze, prev[1], show_path, anim)
 
             if wd < 10 or ht < 7:
                 print("(The 42 pattern was not printed, too small maze size)")
                 print("(min wd: 10, min ht: 7)")
 
-            # the choice from the menu impacts the predefined settings
             choice = maze_menu(menu)
-            if choice == "1":  # this is used as the base condition for gen
+            if choice == "1":
                 settings["generate"] = True
 
-            elif choice == "2":  # this changes the print_maze parameter
+            elif choice == "2":
                 settings["show_path"] = not settings["show_path"]
 
-            elif choice == "3":  # this changes the print_maze parameter
+            elif choice == "3":
                 colors = next(gen_colors)
                 prev = colors
 
-            elif choice == "4":  # this just quits the program
+            elif choice == "4":
                 settings["animation"] = not settings["animation"]
 
-            elif choice == "5":  # this just quits the program
+            elif choice == "5":
                 raise ExitingMaze("Exiting maze...")
 
-            elif choice == "6":  # this impacts the maze_generator param
+            elif choice == "6":
                 settings["use_seed"] = not settings["use_seed"]
                 settings["generate"] = True
 

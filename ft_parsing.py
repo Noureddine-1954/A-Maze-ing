@@ -3,11 +3,38 @@ from typing import Dict, Any
 
 
 class ConfigError(Exception):
-    """Custom Error"""
+    """Exception raised for invalid or missing maze configuration values.
+
+    Used throughout the parsing pipeline to signal any error that prevents
+    the program from constructing a valid :class:`MazeGenerator` configuration,
+    including malformed config files, out-of-bounds coordinates, and
+    unsatisfied required keys.
+    """
+
     pass
 
 
 def ftwo_cells(height: int, width: int) -> set[tuple[int, int]]:
+    """Return the set of grid coordinates occupied by the ``42`` pattern.
+
+    Computes the cells that form the digit glyphs ``4`` and ``2``, each
+    rendered as a 5x5 pixel bitmap, centred horizontally and vertically in a
+    maze of the given dimensions. If the maze is too small to fit the pattern,
+    an empty set is returned instead.
+
+    The ``4`` glyph occupies columns ``offset`` to ``offset + 4`` and the
+    ``2`` glyph occupies columns ``offset + 5`` to ``offset + 9``, where
+    ``offset = width // 2 - 5``. Both glyphs share the same row offset of
+    ``height // 2 - 2``.
+
+    Args:
+        height: Number of rows in the maze grid.
+        width: Number of columns in the maze grid.
+
+    Returns:
+        A set of ``(row, col)`` tuples for every cell that belongs to the
+        ``42`` pattern, or an empty set if ``width < 10`` or ``height < 7``.
+    """
     if width < 10 or height < 7:
         return set()
 
@@ -44,6 +71,21 @@ def ftwo_cells(height: int, width: int) -> set[tuple[int, int]]:
 
 
 def parse_pair(value: str) -> tuple[int, int]:
+    """Parse a ``"row, col"`` string into an integer coordinate tuple.
+
+    Expects exactly two comma-separated integer tokens. Leading and trailing
+    whitespace around each token is ignored.
+
+    Args:
+        value: A string of the form ``"row, col"`` (e.g. ``"3, 7"``).
+
+    Returns:
+        A ``(row, col)`` tuple of integers.
+
+    Raises:
+        ConfigError: If ``value`` does not contain exactly one comma, or if
+            either token cannot be converted to an integer.
+    """
     parts = value.split(",")
     if len(parts) != 2:
         raise ConfigError(f"Invalid coordinate format: {value}")
@@ -54,7 +96,45 @@ def parse_pair(value: str) -> tuple[int, int]:
 
 
 def ft_parsing() -> Dict[str, Any]:
+    """Parse and validate the maze config file supplied on the command line.
 
+    Reads the plain-text config file passed as ``sys.argv[1]``, parses each
+    ``KEY = VALUE`` directive, and validates the combined configuration before
+    returning it. Blank lines and lines beginning with ``#`` are ignored.
+
+    The following keys are **required**:
+
+    - ``WIDTH`` — positive integer number of maze columns.
+    - ``HEIGHT`` — positive integer number of maze rows.
+    - ``ENTRY`` — ``"row, col"`` coordinate of the maze entry point.
+    - ``EXIT`` — ``"row, col"`` coordinate of the maze exit point.
+    - ``OUTPUT_FILE`` — path to the file where the solved maze is written.
+    - ``PERFECT`` — ``True`` or ``False``; whether to generate a perfect maze.
+
+    The following key is **optional**:
+
+    - ``SEED`` — integer random seed for reproducible maze generation.
+      Defaults to ``None`` when omitted.
+
+    Cross-field validation enforced after parsing:
+
+    - ``ENTRY`` and ``EXIT`` must differ.
+    - Both coordinates must lie within the ``HEIGHT x WIDTH`` grid bounds.
+    - Neither ``ENTRY`` nor ``EXIT`` may overlap the embedded ``42`` pattern
+      (see :func:`ftwo_cells`).
+    - ``OUTPUT_FILE`` must be writable.
+
+    Returns:
+        A dictionary mapping each recognised key to its parsed Python value.
+        ``SEED`` is always present; it is ``None`` when not specified in the
+        config file.
+
+    Raises:
+        ConfigError: If the program is not invoked with exactly one argument,
+            if the config file cannot be read, if any key is duplicated,
+            unknown, or malformed, if required keys are absent, or if any
+            cross-field validation rule is violated.
+    """
     if len(sys.argv) != 2:
         msg = "Invalid usage, program must be run with the following command: "
         raise ConfigError(msg + "python3 a_maze_ing.py config.txt")
@@ -77,11 +157,9 @@ def ft_parsing() -> Dict[str, Any]:
                 key = key.strip().upper()
                 value = value.strip()
 
-                # check for duplicate configs
                 if key in config_content:
                     raise ConfigError(f"{key} was declared more than once")
 
-                # check for each of the 5 mandatory and the seed key
                 if key == "WIDTH":
                     try:
                         config_content[key] = int(value)
@@ -122,18 +200,15 @@ def ft_parsing() -> Dict[str, Any]:
                     raise ConfigError(f"Unknown key: {key}")
 
     except (FileNotFoundError, PermissionError) as e:
-        # check if config.txt exists or have permission
         raise ConfigError(e)
-    # check wether all requirements are met
+
     missing = required - config_content.keys()
     if missing:
         raise ConfigError(f"Missing keys: {missing}")
 
-    # check if entry and exit are the same
     if config_content["ENTRY"] == config_content["EXIT"]:
         raise ConfigError("ENTRY and EXIT cannot be the same")
 
-    # check for the logic of the coordinates and the size of the maze
     width = config_content["WIDTH"]
     height = config_content["HEIGHT"]
     entry_x, entry_y = config_content["ENTRY"]
@@ -148,7 +223,6 @@ def ft_parsing() -> Dict[str, Any]:
     if not (0 <= exit_y < width and 0 <= exit_x < height):
         raise ConfigError("EXIT outside maze bounds")
 
-    # in case additional keys were not given
     if "SEED" not in config_content:
         config_content["SEED"] = None
 
@@ -165,5 +239,4 @@ def ft_parsing() -> Dict[str, Any]:
     except Exception as e:
         raise ConfigError(e)
 
-    # print(config_content)
     return config_content
