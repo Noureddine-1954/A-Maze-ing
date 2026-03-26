@@ -3,7 +3,37 @@ from mazegen import Cell
 
 
 class MazeGenerator:
-    """this is a maze class"""
+    """
+    Generates a 2D maze grid using a depth-first search (DFS) algorithm.
+
+    The maze consists of `Cell` objects arranged in a rectangular grid.
+    The generator supports both perfect mazes (no cycles, exactly one path
+    between any two points) and imperfect mazes (with loops). It can also
+    optionally embed a predefined "42 pattern" inside the maze when the
+    dimensions allow it.
+
+    The generation process works as follows:
+        1. Initialize a grid of fully closed cells.
+        2. Mark entrance and exit cells.
+        3. Optionally carve a fixed "42 pattern" in the center.
+        4. Use a randomized DFS (backtracking) algorithm to carve passages.
+        5. If the maze is not perfect, randomly open additional walls to
+           introduce cycles.
+
+    Attributes:
+        height (int): Number of rows in the maze.
+        width (int): Number of columns in the maze.
+        entrance (Tuple[int, int]): Coordinates (row, col) of the entry cell.
+        departure (Tuple[int, int]): Coordinates (row, col) of the exit cell.
+        seed (Optional[int]): Seed for the random number generator to allow
+            reproducible maze generation.
+        perfect (bool): If True, generates a perfect maze (no loops).
+            If False, introduces random cycles.
+
+    Methods:
+        generate_maze() -> list[list[Cell]]:
+            Generates and returns the maze as a 2D list of `Cell` objects.
+    """
     def __init__(self,
                  height: int,
                  width: int,
