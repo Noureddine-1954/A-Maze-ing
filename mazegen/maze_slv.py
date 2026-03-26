@@ -6,6 +6,37 @@ from typing import Optional, Tuple
 def maze_solver(maze: list[list[Cell]],
                 start: Tuple[int, int],
                 departure: Tuple[int, int]) -> list[Tuple[int, int]]:
+    """
+    Solves a maze using the Breadth-First Search (BFS) algorithm.
+
+    This function finds the shortest path from the start position to the
+    departure position in a maze represented as a 2D grid of `Cell` objects.
+    It traverses only through open walls and avoids revisiting cells.
+
+    The algorithm works as follows:
+        1. Start from the given starting cell.
+        2. Explore all reachable neighboring cells level by level (BFS).
+        3. Track each visited cell and its predecessor.
+        4. Stop when the departure cell is reached.
+        5. Reconstruct the path by backtracking from the departure to the
+        start.
+        6. Mark the path in the maze by setting `is_path = True` on each cell.
+
+    Args:
+        maze (list[list[Cell]]): A 2D grid representing the maze.
+        start (Tuple[int, int]): Coordinates (row, col) of the starting cell.
+        departure (Tuple[int, int]): Coordinates (row, col) of the target cell.
+
+    Returns:
+        list[Tuple[int, int]]: The shortest path from start to departure as a
+        list of coordinates. If no path exists, returns a path containing only
+        the departure if it was never reached.
+
+    Notes:
+        - Movement is allowed only through open walls (where the corresponding
+          direction attribute is True).
+        - The function modifies the input maze by marking the solution path.
+    """
     directions = {
         "east":  (0,  1),
         "west":  (0, -1),
