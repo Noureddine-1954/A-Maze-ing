@@ -81,7 +81,7 @@ def ft_parsing() -> Dict[str, Any]:
                 if key in config_content:
                     raise ConfigError(f"{key} was declared more than once")
 
-                # check for each of the 5 mandatory and two bonus keys
+                # check for each of the 5 mandatory and the seed key
                 if key == "WIDTH":
                     try:
                         config_content[key] = int(value)
@@ -113,7 +113,10 @@ def ft_parsing() -> Dict[str, Any]:
                         raise ConfigError(msg + " expected True/False")
 
                 elif key == "SEED":
-                    config_content[key] = int(value)
+                    try:
+                        config_content[key] = int(value)
+                    except ValueError:
+                        raise ConfigError("Given Seed is not a valid int")
 
                 else:
                     raise ConfigError(f"Unknown key: {key}")

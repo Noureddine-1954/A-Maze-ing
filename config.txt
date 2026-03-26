@@ -4,5 +4,5 @@ HEIGHT = 10
 ENTRY = 9, 19
 EXIT = 0, 0
 PERFECT = False
-seed = 42
+seed = abc
 WIDTH = 20
