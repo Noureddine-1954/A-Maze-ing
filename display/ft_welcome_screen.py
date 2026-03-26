@@ -2,7 +2,9 @@ from display.menu_print import clear
 
 
 def print_welcome_screen() -> None:
-    # colors
+    """Clear the terminal and display the application title card.
+    Blocks until the user presses Enter.
+    """
     reset = "\033[0m"
     bold = "\033[1m"
 
