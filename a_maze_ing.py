@@ -1,6 +1,10 @@
 from ft_parsing import ft_parsing, ConfigError
 from mazegen import MazeGenerator, maze_solver
-from display import print_maze, maze_menu, ExitingMaze, clear
+from display import (print_maze,
+                     maze_menu,
+                     ExitingMaze,
+                     clear,
+                     print_welcome_screen)
 from ft_outputing import ft_outputing
 from typing import Generator, Tuple
 
@@ -40,6 +44,11 @@ if __name__ == "__main__":
         "use_seed": True,
         "animation": True
     }
+    try:
+        print_welcome_screen()
+    except BaseException:
+        print("\nExiting Program...")
+        exit(0)
 
     ht = config["HEIGHT"]
     wd = config["WIDTH"]

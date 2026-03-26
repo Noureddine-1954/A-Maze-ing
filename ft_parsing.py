@@ -8,7 +8,6 @@ class ConfigError(Exception):
 
 
 def ftwo_cells(height: int, width: int) -> set[tuple[int, int]]:
-    """abgherbvj"""
     if width < 10 or height < 7:
         return set()
 
@@ -122,9 +121,9 @@ def ft_parsing() -> Dict[str, Any]:
                 else:
                     raise ConfigError(f"Unknown key: {key}")
 
-    except (FileNotFoundError, PermissionError):
+    except (FileNotFoundError, PermissionError) as e:
         # check if config.txt exists or have permission
-        raise ConfigError(f"{sys.argv[1]}, not found")
+        raise ConfigError(e)
     # check wether all requirements are met
     missing = required - config_content.keys()
     if missing:
