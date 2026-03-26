@@ -3,7 +3,7 @@ from time import sleep
 
 
 def print_maze(grid: list[list[Cell]],
-               switch_color: bool = False,
+               color: str = "\033[0m",
                path: bool = False,
                anim: bool = True) -> None:
     rows = len(grid)
@@ -13,12 +13,7 @@ def print_maze(grid: list[list[Cell]],
     total_chars = (2 * rows + 2) * (cols * 4 + 1)
     chr_time = 3.0 / total_chars if anim else 0
 
-    if switch_color:
-        color = "\033[36m"
-        reset = "\033[0m"
-    else:
-        color = "\033[0m"
-        reset = "\033[0m"
+    reset = "\033[0m"
 
     def cell_char(cell: Cell) -> str:
         if cell.is_start:

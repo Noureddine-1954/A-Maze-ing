@@ -122,11 +122,11 @@ class MazeGenerator:
                         if maze[r][c].is_ftwo:
                             continue
                         if r + 1 < height and not maze[r + 1][c].is_ftwo:
-                            if random() < 0.15:
+                            if random() < 0.1:
                                 maze[r][c].south = True
                                 maze[r + 1][c].north = True
                         if c + 1 < width and not maze[r][c + 1].is_ftwo:
-                            if random() < 0.15:
+                            if random() < 0.1:
                                 maze[r][c].east = True
                                 maze[r][c + 1].west = True
 

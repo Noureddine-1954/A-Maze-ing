@@ -8,6 +8,7 @@ class ConfigError(Exception):
 
 
 def ftwo_cells(height: int, width: int) -> set[tuple[int, int]]:
+    """abgherbvj"""
     if width < 10 or height < 7:
         return set()
 
@@ -145,7 +146,7 @@ def ft_parsing() -> Dict[str, Any]:
     if not (0 <= entry_y < width and 0 <= entry_x < height):
         raise ConfigError("ENTRY outside maze bounds")
 
-    if not (0 <= exit_x < width and 0 <= exit_y < height):
+    if not (0 <= exit_y < width and 0 <= exit_x < height):
         raise ConfigError("EXIT outside maze bounds")
 
     # in case additional keys were not given
