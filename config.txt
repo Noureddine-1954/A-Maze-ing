@@ -1,8 +1,8 @@
 # MazeConfig
-HEIGHT = 20
+HEIGHT = 2
 WIDTH = 20
 ENTRY = 0, 0
-EXIT = 0, 2
+EXIT = 19, 19
 PERFECT = False
 SEED = 42
 OUTPUT_FILE = output_maze.txt
