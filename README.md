@@ -186,3 +186,32 @@ This project provided hands-on experience with:
 * Clean and reusable code architecture
 
 It also highlighted the importance of planning, collaboration, and iteration in software development.
+
+
+## Maze Generator Module Section
+
+This module provides the `MazeGenerator` class for generating 2D mazes using a
+randomized depth-first search (DFS) algorithm. It supports both perfect mazes
+(no cycles) and imperfect mazes (with loops), and can optionally embed a
+predefined "42" pattern in the centre. The module also includes a BFS-based
+solver to find the shortest path from entrance to exit.
+
+Example:
+    
+    >>> from mazegen import MazeGenerator
+
+    >>> # Create a 20x20 perfect maze with a fixed seed
+    >>> gen = MazeGenerator(height=20, width=20,
+    ...                      entrance=(0,0), departure=(19,19),
+    ...                      seed=42, perfect=True)
+    >>> maze = gen.generate_maze()
+
+    >>> # Solve the maze
+    >>> path = gen.maze_solver()
+
+    >>> # Access the grid
+    >>> cell = maze[5][5]
+    >>> print(cell.east)
+    >>> print(cell.east)
+  
+Run maze_gen directly to see a test of the module

@@ -104,7 +104,7 @@ def main() -> None:
             if generate:
                 maze_instance.seed = seed if use_seed else None
                 maze = maze_instance.generate_maze()
-                solution = maze_instance.maze_solver(maze, ent, ext)
+                solution = maze_instance.maze_solver()
                 ft_outputing(ot_file, maze, ent, ext, solution)
                 settings["generate"] = False
 
@@ -118,6 +118,7 @@ def main() -> None:
                   f"Generation: {maze_instance.benchmark['generation']:.6f}s |"
                   f" Solution: {maze_instance.benchmark['solution']:.6f}s]",
                   )
+            print(len(solution)-1, "steps required to reach the goal!\n")
             choice = maze_menu(menu)
             if choice == "1":
                 settings["generate"] = True

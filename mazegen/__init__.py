@@ -1,8 +1,6 @@
-from mazegen.cell_class import Cell
-from mazegen.maze_gen import MazeGenerator
+from .maze_gen import MazeGenerator, Cell
 
 __all__ = [
     "Cell",
     "MazeGenerator",
-    "maze_solver",
 ]
