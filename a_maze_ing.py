@@ -37,6 +37,7 @@ def generate_color() -> Generator[Tuple[str, str], None, None]:
 
 
 def main() -> None:
+    """The Main program"""
     try:
         config = ft_parsing()
     except ConfigError as e:
