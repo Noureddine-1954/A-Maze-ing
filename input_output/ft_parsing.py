@@ -38,34 +38,22 @@ def ftwo_cells(height: int, width: int) -> set[tuple[int, int]]:
     if width < 10 or height < 7:
         return set()
 
-    four = [
-        [0, 1, 0, 1, 0],
-        [0, 1, 0, 1, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 0, 1, 0],
-        [0, 0, 0, 1, 0],
-    ]
-    two = [
-        [0, 1, 1, 1, 0],
-        [0, 0, 0, 1, 0],
-        [0, 1, 1, 1, 0],
-        [0, 1, 0, 0, 0],
-        [0, 1, 1, 1, 0],
+    four_two = [
+        [0, 1, 0, 1, 0, 0, 1, 1, 1, 0],
+        [0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 1, 1, 1, 0],
     ]
 
     row_offset = height // 2 - 2
     col_offset = width // 2 - 5
     cells = set()
 
-    for r, row in enumerate(four):
+    for r, row in enumerate(four_two):
         for c, val in enumerate(row):
             if val:
                 cells.add((row_offset + r, col_offset + c))
-
-    for r, row in enumerate(two):
-        for c, val in enumerate(row):
-            if val:
-                cells.add((row_offset + r, col_offset + 5 + c))
 
     return cells
 

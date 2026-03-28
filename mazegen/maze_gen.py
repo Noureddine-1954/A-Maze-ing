@@ -165,25 +165,18 @@ class MazeGenerator:
         maze[ext_x][ext_y].is_end = True
 
         def force_ftwo() -> None:
-            four = [
-                [0, 1, 0, 1, 0],
-                [0, 1, 0, 1, 0],
-                [0, 1, 1, 1, 0],
-                [0, 0, 0, 1, 0],
-                [0, 0, 0, 1, 0],
-            ]
-            two = [
-                [0, 1, 1, 1, 0],
-                [0, 0, 0, 1, 0],
-                [0, 1, 1, 1, 0],
-                [0, 1, 0, 0, 0],
-                [0, 1, 1, 1, 0],
+            four_two = [
+                [0, 1, 0, 1, 0, 0, 1, 1, 1, 0],
+                [0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
+                [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+                [0, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+                [0, 0, 0, 1, 0, 0, 1, 1, 1, 0],
             ]
 
             rw_off = height // 2 - 2
             cl_off = width // 2 - 5
 
-            for r, row in enumerate(four):
+            for r, row in enumerate(four_two):
                 for c, val in enumerate(row):
                     if val:
                         if r == 0 and rw_off - 1 >= 0:
@@ -191,15 +184,6 @@ class MazeGenerator:
                         maze[rw_off + r][cl_off + c - 1].east = False
                         maze[rw_off + r][cl_off + c] = Cell(0)
                         maze[rw_off + r][cl_off + c].is_ftwo = True
-
-            for r, row in enumerate(two):
-                for c, val in enumerate(row):
-                    if val:
-                        if r == 0 and rw_off - 1 >= 0:
-                            maze[rw_off - 1][cl_off + 5 + c].south = False
-                        maze[rw_off + r][cl_off + 5 + c - 1].east = False
-                        maze[rw_off + r][cl_off + 5 + c] = Cell(0)
-                        maze[rw_off + r][cl_off + 5 + c].is_ftwo = True
 
         if not (width < 10 or height < 7):
             force_ftwo()
