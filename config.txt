@@ -1,5 +1,5 @@
 # MazeConfig
-HEIGHT = 2
+HEIGHT = 20
 WIDTH = 20
 ENTRY = 0, 0
 EXIT = 19, 19

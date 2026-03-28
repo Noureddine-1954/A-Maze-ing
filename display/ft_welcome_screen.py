@@ -28,7 +28,7 @@ def print_welcome_screen() -> None:
     lines = [
       f"{blu}{pad}┌───────────────────────────────┐",
       f"{blu}{pad}│                               │",
-      f"{blu}{pad}│ {bld}{wht}A · M · A · Z · E · I · N · G{rst}{blu} │",
+      f"{blu}{pad}│      {bld}{wht}A ─ M A Z E ─ I N G{rst}{blu}      │",
       f"{blu}{pad}│ {dim}{gry}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{rst}{blu} │",
       f"{blu}{pad}│                               │",
       f"{blu}{pad}│   {gry}a maze generator & solver{blu}   │",

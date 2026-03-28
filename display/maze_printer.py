@@ -58,7 +58,7 @@ def print_maze(
         if cell.is_end:
             return '\033[31m X ' + color
         if cell.is_path and path:
-            return '\033[35m . ' + color
+            return f'\033[35m {cell.next_block} ' + color
         if cell.is_ftwo:
             return '\033[0m███' + color
         return '   '

@@ -1,8 +1,8 @@
 *This project has been created as part of the 42 curriculum by nel-mout, ylhamidi.*
 
-#  A-Maze-ing
+# A-Maze-ing
 
-##  Description
+## Description
 
 This project consists of generating and solving mazes using algorithmic techniques. The goal is to create a fully functional maze system that can:
 
@@ -10,52 +10,28 @@ This project consists of generating and solving mazes using algorithmic techniqu
 * Solve the maze using a pathfinding algorithm
 * Output the result in a structured format
 
-The project emphasizes algorithm design, data structures, and clean code architecture. It also focuses on transforming recursive logic into efficient iterative solutions.
-
 ---
 
-##  Instructions
+## Instructions
 
-###  Installation
+### Installation
 
 Clone the repository:
 
 ```bash
-git clone <your-repo-url>
-cd <repo-name>
-```
-
-Make sure you have Python installed (3.10+ recommended).
-
----
-
-###  Execution
-
-Run your main script (example):
-
-```bash
-python main.py config.txt
+git clone git@vogsphere-v2.1337.ma:vogsphere/chintra-uuid-544a240e-34b3-4091-aeba-65f0dc5b7c46-7269955-nel-mout amazing
+cd amazing
 ```
 
 ---
 
-###  Running Tests
-
-Install pytest if needed:
+### Execution
 
 ```bash
-pip install pytest
+make run
 ```
 
-Run tests:
-
-```bash
-pytest
-```
-
----
-
-##  Config File Structure
+## Config File Structure
 
 The maze is generated using a configuration file with the following format:
 
@@ -72,16 +48,17 @@ OUTPUT_FILE = output_maze.txt
 
 ### Fields:
 
-* `HEIGHT`, `WIDTH`: Dimensions of the maze
-* `ENTRY`: Starting position (row, col)
-* `EXIT`: Ending position (row, col)
-* `PERFECT`: If `True`, generates a perfect maze (no loops)
-* `SEED`: Controls randomness for reproducibility
-* `OUTPUT_FILE`: File where the maze is saved
+* `HEIGHT` ; Height of the maze.
+* `WIDTH`: Width of the maze.
+* `ENTRY`: Starting position (row, col).
+* `EXIT`: Ending position (row, col).
+* `PERFECT`: If `True`, generates a perfect maze (no loops).
+* `SEED`: Controls randomness for reproducibility (not mandatory).
+* `OUTPUT_FILE`: File where the maze is saved.
 
 ---
 
-##  Maze Generation Algorithm
+## Maze Generation Algorithm
 
 We used an **iterative Depth-First Search (DFS)** algorithm (also known as backtracking).
 
@@ -94,7 +71,7 @@ We used an **iterative Depth-First Search (DFS)** algorithm (also known as backt
 
 ---
 
-##  Why This Algorithm?
+## Why This Algorithm?
 
 We chose iterative DFS because:
 
@@ -105,41 +82,41 @@ We chose iterative DFS because:
 
 ---
 
-##  Reusable Components
+## Reusable Components
 
 The following parts of the project are reusable:
 
-###  `Cell` class
+### `Cell` class
 
 * Represents each maze cell
 * Encodes walls and state (start, end, path, etc.)
 * Can be reused in any grid-based system
 
-###  `MazeGenerator` class
+### `MazeGenerator` class
 
 * Fully configurable maze generator
 * Supports deterministic generation via seed
 * Can be reused in games, simulations, or pathfinding systems
 
-###  Solver
+### Solver
 
-* Breadth-First Search (BFS) based
+* Breadth-First Search (BFS)
 * Works on any compatible grid structure
 
- Everything outside `if __name__ == "__main__"` is designed to be reusable.
+Everything outside `if __name__ == "__main__"` is designed to be reusable.
 
 ---
 
-##  Team & Project Management
+## Team & Project Management
 
 ### Roles
 
-* **nel-mout** → Maze generation (DFS, structure, ftwo pattern)
-* **ylhamidi** → Maze solving (BFS, pathfinding)
+* **nel-mout** → Maze generation(DFS), Config file parsing, Cell class definition, the main program, the welcome screen and the menu printer.
+* **ylhamidi** → Maze solving (BFS), Outputting into the output file and the maze printer.
 
 ---
 
-###  Planning & Evolution
+### Planning & Evolution
 
 Initial plan:
 
@@ -154,24 +131,39 @@ What changed:
 
 ---
 
-###  What Worked Well
+### What Worked Well
 
 * Clear separation between generation and solving
 * Use of classes improved maintainability
 * Deterministic generation using seeds
-* Testing with pytest helped catch bugs early
 
 ---
 
-###  What Could Be Improved
+### What Could Be Improved
 
-* 
+* **Maze visualization enhancements**
+  Improving the visual output (graphical interface) would make the maze more engaging.
+
+* **Interactive mode**
+  Adding a mode where users can step through the maze generation or solving process would improve understanding and usability.
+
+* **Multiple maze generation algorithms**
+  Supporting other algorithms (Prim’s, Kruskal’s, etc.) would allow generating different maze styles and structures.
+
+* **Export formats**
+  Adding support for exporting mazes in formats like JSON or images could make the project easier to integrate with other systems.
+
+* **Benchmarking tools**
+  Including tools to measure generation/solving time would help evaluate performance and compare algorithms.
+
+* **Unit test coverage expansion**
+  Increasing test coverage, especially for edge cases, would further improve reliability.
 
 ---
 
-##  Tools Used
+## Tools Used
 
-###  AI
+### AI
 
 Used for:
 
@@ -180,30 +172,15 @@ Used for:
 * Improving code structure
 * Explaining complex concepts (DFS, BFS, etc.)
 
----
-
-###  pytest
-
-Used for:
-
-* Writing automated tests
-* Verifying correctness
-* Detecting edge case failures
-* Ensuring stability during refactoring
-
----
-
-##  Resources
+## Resources
 
 * Depth-First Search (DFS) – algorithm references
 * Breadth-First Search (BFS) – pathfinding techniques
-* Maze generation techniques (recursive backtracking)
-* Python documentation
-* pytest documentation
+* Python documentation (PEP 257)
 
 ---
 
-##  Conclusion
+## Conclusion
 
 This project provided hands-on experience with:
 

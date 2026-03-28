@@ -53,6 +53,8 @@ class Cell:
         self.is_end = is_end
         self.is_path = is_path
         self.is_ftwo = is_ftwo
+        if is_path:
+            self.next_block = ""
 
     def open_wall(self, direction: str) -> None:
         """(remove) a wall by name: 'north', 'east', 'south', 'west'."""

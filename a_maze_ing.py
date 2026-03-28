@@ -1,5 +1,5 @@
 from ft_parsing import ft_parsing, ConfigError
-from mazegen import MazeGenerator, maze_solver
+from mazegen import MazeGenerator
 from display import (print_maze,
                      maze_menu,
                      ExitingMaze,
@@ -58,8 +58,7 @@ if __name__ == "__main__":
     try:
         print_welcome_screen()
     except BaseException:
-        print("\nExiting Program...")
-        exit(0)
+        pass
 
     ht = config["HEIGHT"]
     wd = config["WIDTH"]
@@ -110,7 +109,7 @@ if __name__ == "__main__":
             if generate:
                 maze_instance.seed = seed if use_seed else None
                 maze = maze_instance.generate_maze()
-                solution = maze_solver(maze, ent, ext)
+                solution = maze_instance.maze_solver(maze, ent, ext)
                 ft_outputing(ot_file, maze, ent, ext, solution)
                 settings["generate"] = False
 
@@ -120,6 +119,10 @@ if __name__ == "__main__":
                 print("(The 42 pattern was not printed, too small maze size)")
                 print("(min wd: 10, min ht: 7)")
 
+            print("Benchmark: ["
+                  f"Generation: {maze_instance.benchmark['generation']:.6f}s |"
+                  f" Solution: {maze_instance.benchmark['solution']:.6f}s]",
+                  )
             choice = maze_menu(menu)
             if choice == "1":
                 settings["generate"] = True
