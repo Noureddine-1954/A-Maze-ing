@@ -1,18 +1,13 @@
-from ft_parsing import ft_parsing, ConfigError
-from mazegen import MazeGenerator
+from input_output import (ft_parsing,
+                          ConfigError,
+                          ft_outputing)
 from display import (print_maze,
                      maze_menu,
                      ExitingMaze,
                      clear,
                      print_welcome_screen)
-from ft_outputing import ft_outputing
+from mazegen import MazeGenerator
 from typing import Generator, Tuple
-
-# program steps:
-# parsing ...
-# generate maze
-# print it and the menu
-# options etc...
 
 
 def generate_color() -> Generator[Tuple[str, str], None, None]:
@@ -41,7 +36,7 @@ def generate_color() -> Generator[Tuple[str, str], None, None]:
             yield color, all_colors[color]
 
 
-if __name__ == "__main__":
+def main() -> None:
     try:
         config = ft_parsing()
     except ConfigError as e:
@@ -147,3 +142,10 @@ if __name__ == "__main__":
         except (ExitingMaze, KeyboardInterrupt):
             print("\nExiting maze...")
             break
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        print(f"Error of type {type(e).__name__}:", e)

@@ -1,7 +1,7 @@
 [project]
 name = "mazegen"
 version = "1.0.0"
-description = "A reusable maze generation module"
+description = "A reusable maze generation and solving package"
 readme = "README.md"
 requires-python = ">=3.10"
 

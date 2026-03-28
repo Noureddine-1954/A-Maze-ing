@@ -153,12 +153,6 @@ What changed:
 * **Export formats**
   Adding support for exporting mazes in formats like JSON or images could make the project easier to integrate with other systems.
 
-* **Benchmarking tools**
-  Including tools to measure generation/solving time would help evaluate performance and compare algorithms.
-
-* **Unit test coverage expansion**
-  Increasing test coverage, especially for edge cases, would further improve reliability.
-
 ---
 
 ## Tools Used
@@ -174,9 +168,10 @@ Used for:
 
 ## Resources
 
-* Depth-First Search (DFS) – algorithm references
-* Breadth-First Search (BFS) – pathfinding techniques
-* Python documentation (PEP 257)
+* Depth-First Search (DFS) – algorithm references [DFS GfG](https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/)
+* Breadth-First Search (BFS) – pathfinding techniques [BFS GFG](https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/)
+* Python documentation (PEP 257) [Python Docstrings
+](https://www.geeksforgeeks.org/python/python-docstrings/)
 
 ---
 
