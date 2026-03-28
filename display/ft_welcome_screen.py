@@ -26,6 +26,7 @@ def print_welcome_screen() -> None:
     pad = max(0, (terminal_width - box_width) // 2) * " "
 
     lines = [
+      f"{blu}{pad+'        '}('ctrl+c' to skip)",
       f"{blu}{pad}┌───────────────────────────────┐",
       f"{blu}{pad}│                               │",
       f"{blu}{pad}│      {bld}{wht}A ─ M A Z E ─ I N G{rst}{blu}      │",

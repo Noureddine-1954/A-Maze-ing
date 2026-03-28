@@ -220,6 +220,31 @@ def ft_parsing() -> Dict[str, Any]:
     if config_content["EXIT"] in ftwo:
         raise ConfigError("EXIT cannot be inside the 42 pattern")
 
+    forbidden_path = {
+        "a_maze_ing.py",
+        "input_output",
+        "mazegen-1.0.0-py3-none-any.whl",
+        "README.md"
+        "config.txt",
+        "Makefile",
+        "mazegen-1.0.0.tar.gz",
+        "requirements.txt",
+        "display",
+        "mazegen",
+        "pyproject.toml",
+        "./display/ft_welcome_screen.py",
+        "./display/__init__.py",
+        "./display/maze_printer.py",
+        "./display/menu_print.py",
+        "./input_output/ft_outputing.py",
+        "./input_output/ft_parsing.py",
+        "./input_output/__init__.py",
+        "./mazegen/__init__.py",
+        "./mazegen/maze_gen.py",
+    }
+    if config_content['OUTPUT_FILE'] in forbidden_path:
+        raise ConfigError(f"Output file name should not be: {forbidden_path}")
+
     try:
         fichier = open(config_content['OUTPUT_FILE'], 'w')
         fichier.close()
