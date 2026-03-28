@@ -164,6 +164,7 @@ Used for:
 * Generating test cases
 * Debugging logic issues
 * Improving code structure
+* Help with docstrings for code clarity and reusability
 * Explaining complex concepts (DFS, BFS, etc.)
 
 ## Resources
