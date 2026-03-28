@@ -5,4 +5,4 @@ ENTRY = 0, 0
 EXIT = 0, 2
 PERFECT = True
 SEED = 42
-OUTPUT_FILE = output_maze.txt
+OUTPUT_FILE = a_maze_ing.py

@@ -243,7 +243,8 @@ def ft_parsing() -> Dict[str, Any]:
         "./mazegen/maze_gen.py",
     }
     if config_content['OUTPUT_FILE'] in forbidden_path:
-        raise ConfigError(f"Output file name should not be: {forbidden_path}")
+        raise ConfigError("Output file name should not be"
+                          f": {config_content['OUTPUT_FILE']}")
 
     try:
         fichier = open(config_content['OUTPUT_FILE'], 'w')
